@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+    
+    
+
+    <div class="container-fluid py-5 px-5 mt-5">
+        <div class="row row-cols-md-2 row-cols-lg-3 justify-content-center">
+                <% blogs.forEach(blog => { %>
+                    <!-- Article Card -->
+                     <div class="pb-5">
+                        <div class="card article-card overflow-hidden shadow rounded-3 border-0 col" style="min-height: 600px; margin: -50px -50px;">
+                            <div class="" style="width: 100%; height: 100%;">
+                                <!-- Article Image -->
+                                <div>
+                                    <img src="/uploads/<%= blog.coverImage %>" width="105%" height="300px" style="object-fit: cover;">
+                                </div>
+                                
+                                <!-- Article Content -->
+                                <div>
+                                    <div class="card-body d-flex flex-column h-100 p-4">
+                                        <!-- Category -->
+                                        <div class="mb-2">
+                                            <span class="text-uppercase category-badge text-secondary p-1 rounded-1" style="background-color: rgb(240, 240, 240);"><%= blog.category || 'General' %></span>
+                                        </div>
+                                        
+                                        <!-- Title -->
+                                        <h2 class="card-title fw-bold mb-3 mt-3"><%= blog.title %></h2>
+                                        
+                                        <!-- Description -->
+                                        <div>
+                                            <p class="card-text mb-4">
+                                                <% if (blog.body.length > 150) { %>
+                                                    <%= blog.body.slice(0, 147) %>...
+                                                <% } else { %>
+                                                    <% let space= ''%>
+                                                    <%= blog.body %> ...
+                                                    <% for (let i = 5; i < (150 - blog.body.length); i++) { %>
+                                                        <%-`&nbsp;`%>
+                                                    <% } %>
+                                                <% } %>
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Meta Information -->
+                                        <div class="d-flex flex-wrap align-items-center text-secondary mb-4 small">
+                                            <!-- Author -->
+                                            <div class="me-4 d-flex align-items-center">
+                                                <img src="/images/<%= blog.createdBy.profilePhoto %>" alt="Author" class="rounded-circle me-2" width="30" height="30">
+                                                <span><%= blog.createdBy.name %></span>
+                                            </div>
+                                            
+                                            <!-- Date -->
+                                            <div class="me-4 d-flex align-items-center">
+                                                <i class="far fa-calendar me-1"></i>
+                                                <span><%= new Date(blog.createdAt).toLocaleDateString() %></span>
+                                            </div>
+                                            
+                                            <!-- Reading Time -->
+                                            <div class="d-flex align-items-center">
+                                                <i class="far fa-clock me-1"></i>
+                                                <span>5 min read</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Read More Link -->
+                                        <div class="mt-auto">
+                                            <span class="fw-semibold d-inline-flex align-items-center read-more">
+                                                <a href="edit/<%= blog._id %>" class="text-decoration-none text-primary">Edit<i class="fas fa-arrow-right ms-2"></i></a>
+                                            </span>
+                                            <span class="fw-semibold d-inline-flex align-items-center read-more ">
+                                                <a href="delete/<%= blog._id %>" class="text-decoration-none text-danger">Delete<i class="fas fa-arrow-right ms-2"></i></a>
+                                            </span>
+                                            <span class="fw-semibold d-inline-flex align-items-center read-more">
+                                                <a href="/blog/<%= blog._id %>" class="text-decoration-none text-dark">Read More -> <i class="fas fa-arrow-right ms-2"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <%- include('./partials/script') %>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Signin</title>
+</head>
+<body style="background-color: #f8f9fa;">
+    <%- include('./partials/nav') %>
+    <h1 class="mb-4 text-center classic mt-4">Your story Awaits</h1><hr class="mx-5">
+    <div class="container mt-4">
+        <form action="/user/signin" method="POST" class="mx-5 mt-5">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" required/>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required/>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-classic-filled btn-classic w-50 m-auto mt-4">Sign in</button>
+          </div>
+        </form>
+    </div>
+    <%- include('./partials/script') %>
+</body>
+</html>

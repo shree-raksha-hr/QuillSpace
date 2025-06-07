@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">    
+    <title>Home Page</title>
+    <style>
+        #markdown-editor {
+            resize: vertical;
+            overflow-y: auto;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+    
+    <div class="container mt-4">
+        <form action="/blog/edit/<%= blog._id %>" method="post" enctype="multipart/form-data" id="postForm">
+            
+            <div class="my-3">
+                <label for="cover" class="form-label">Cover Image</label>
+                <input type="file" class="form-control" id="cover" name="coverImage">
+            </div>
+
+            <% if (blog && blog.coverImage) { %>
+                <p>Current Image:</p>
+                <img src="/uploads/<%= blog.coverImage %>" alt="Blog Image" style="max-height: 200px; object-fit: cover;" />
+            <% } %>
+
+            <div class="my-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="<%= blog ? blog.title : '' %>" required>
+            </div>
+
+            <div class="my-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" name="category" id="category">
+                    <option value="general">General</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="food">Food</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="markdown-editor" class="form-label">Body</label>
+                <textarea class="form-control" name="body" id="markdown-editor" rows="10" style="overflow-y: auto;" 
+                placeholder="Write your post..."><%= blog ? blog.body : '' %></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('./partials/script') %>
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
+    <script>
+        // Initialize the markdown editor
+        const easyMDE = new EasyMDE({ element: document.getElementById("markdown-editor") });
+        const title = document.getElementById("title").value;
+        const content = easyMDE.value();
+        document.querySelector('.easyMDEContainer').style.maxHeight = '400px';
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary ms-auto px-4 py-3 fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Blogly</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav" style="width:100%">
+          <li class="nav-item mx-2">
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" aria-current="page" href="/">Categories</a>
+          </li>
+          <% if (locals.user) { %>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="/blog/myBlogs">My Blogs</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="/blog/addBlog">New Blog</a>
+            </li>
+            
+            <form class="search-form d-flex me-3">
+              <!-- <i class="fas fa-search"></i> -->
+              <input class="form-control me-2" type="search" placeholder="Search blog..." aria-label="Search">
+            </form>
+
+            <li class="nav-item dropdown ms-auto mx-2">
+              <img src="/images/<%= user.profilePhoto %>" width="40px" height="40px" style="border-radius: 50%; display: inline; object-fit: cover;">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: inline;">
+                <%= locals.user.name %>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/user/profile/<%= user._id %>">View Profile</a></li>
+                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+              </ul>
+            </li>
+          <% } else { %>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="/user/signup">Create Account</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link" href="/user/signin">Sign in</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <% if (locals.error) { %>
+   <div class="container mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
+   </div>
+  <% } %>
+
+  <% if (locals.success) { %>
+    <div class="container mt-4" id="alert">
+     <div class="alert alert-success" role="alert">
+       <%= locals.success %>
+     </div>
+    </div>
+  <% } %>
