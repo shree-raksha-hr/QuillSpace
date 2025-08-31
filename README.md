@@ -1,6 +1,6 @@
-# Quill - A Full-Featured Blogging Platform
+# QuillSpace - A Full-Featured Blogging Platform
 
-**Quill** is a full-stack blogging platform built with Node.js, Express, MongoDB, and EJS, enabling users to publish rich Markdown-based blog posts with images, engage through comments, and personalize their experience through likes, follows, categories, and curated feeds.
+**QuillSpace** is a full-stack blogging platform built with Node.js, Express, MongoDB, and EJS, enabling users to publish rich Markdown-based blog posts with images, engage through comments, and personalize their experience through likes, follows, categories, and curated feeds.
 
 ---
 
